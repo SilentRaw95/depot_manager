@@ -23,6 +23,7 @@
           echo '<a href="./users.php">Usuarios</a>';
         } ?>
         <a href="#">Productos</a>
+        <a href="./scripts/logout.php">Cerrar session</a>
       </div>
       <!-- Contenido -->
       <div class="contet_page topSpace">
