@@ -1,11 +1,11 @@
 <?php
-  include('./scripts/profile_info.php');
+  $error = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Depot manager - Perfil</title>
+    <title>Depot manager - Usuarios</title>
 
     <link href="./css/base.css" rel="stylesheet" type="text/css" />
   </head>
@@ -14,19 +14,23 @@
       <!-- Banner -->
       <div class="borde banner">
         <!--<img class="logo" src="./img/joy_emoji.jpg"/>-->
-        <h2 class="banner_tutulo">Perfil</h2>
+        <h2 class="banner_tutulo">Adminstrador</h2>
       </div>
       <!-- Menu -->
       <div class="menusup topSpace">
-        <a href="#" class="active">Perfil</a>
-        <?php if($rol == 1){
-          echo '<a href="./users.php">Usuarios</a>';
-        } ?>
-        <a href="#">Productos</a>
+        <a href="./profile.php">Perfil</a>
+        <a href="#" class="active">Administrar</a>
       </div>
       <!-- Contenido -->
       <div class="contet_page topSpace">
-        <p>Hola: <?php echo $nombre; ?></p>
+        <form action="" method="post">
+          <label>Usuario :</label>
+          <input id="name" name="username" placeholder="username" type="text">
+          <label>Contraseña :</label>
+          <input id="password" name="password" placeholder="**********" type="password"><br><br>
+          <input name="submit" type="submit" value=" Crear ">
+          <span><?php echo $error; ?></span>
+        </form>
       </div>
       <!-- Footer -->
       <div class="borde topSpace">
