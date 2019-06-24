@@ -1,4 +1,5 @@
 <?php
+  include('config.php');
   session_start();
   $error = '';
 
@@ -8,7 +9,6 @@
     } else {
       $username = $_POST['username'];
       $password = $_POST['password'];
-      $conexion = mysqli_connect("localhost", "root", "", "depot_manager"); 
       $consulta = "SELECT * FROM users WHERE username = '$username' AND password = '$password' LIMIT 1";
       $resultado = mysqli_query($conexion, $consulta);
 

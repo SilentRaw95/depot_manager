@@ -28,6 +28,7 @@
       </div>
       <!-- Contenido -->
       <div class="contet_page topSpace">
+        <!--formulario de usuarios-->
         <form action="" method="post">
           <label>Usuario :</label>
           <input id="username" name="username" placeholder="username" type="text">
@@ -48,6 +49,38 @@
           <input name="guardar" id="guardar" type="submit" value=" Crear ">
           <span><?php echo $error_add; ?></span>
         </form>
+        <!--tabla de usuarios form-->
+        <?php include('./scripts/users_table.php'); ?>
+        <table>  
+          <thead>
+            <tr>
+              <th>Usuario</th>  
+              <th>Nombre</th>
+            </tr>
+          <thead>
+          <tbody>
+            <?php  
+              while ($row = mysqli_fetch_array($rs_result)) {
+                echo "<tr>"; 
+                echo "<td>".$row['username']."</td>"; 
+                echo "<td>".$row['name']."</td>";
+                echo "</tr>"; 
+              }; 
+            ?>
+          </tbody>  
+        </table>
+        <?php  
+          $sql = "SELECT COUNT(id) FROM users";  
+          $rs_result = mysqli_query($conexion, $sql);  
+          $row = mysqli_fetch_array($rs_result);  
+          $total_records = $row[0];  
+          $total_pages = ceil($total_records / $limit);  
+          $pagLink = "<div class='pagination'>";  
+          for ($i=1; $i<=$total_pages; $i++) {  
+            $pagLink .= "<a href='./users.php?page=".$i."'>".$i."</a>";  
+          };
+          echo $pagLink . "</div>";  
+        ?>
       </div>
       <!-- Footer -->
       <div class="borde topSpace">

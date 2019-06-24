@@ -1,4 +1,5 @@
 <?php
+  include('config.php');
   //funcion de anadir usuarios
   $error_add = "";
 
@@ -36,7 +37,6 @@
     }
 
     if($validation == TRUE){
-      $conexion = mysqli_connect("localhost", "root", "", "depot_manager");
       $sql = "INSERT INTO users (username, password, name, email, role, active) VALUES ('$username', '$password', '$name', '$email', $rol, 1)";
 
       if(mysqli_query($conexion, $sql)){
