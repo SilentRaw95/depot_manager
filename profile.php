@@ -1,5 +1,6 @@
 <?php
   include('./scripts/profile_info.php');
+  include('./scripts/session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

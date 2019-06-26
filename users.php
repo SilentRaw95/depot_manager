@@ -1,6 +1,8 @@
 <?php
   include('./scripts/profile_info.php');
   include('./scripts/create.php');
+  include('./scripts/session.php');
+  include('./scripts/users_table.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +30,7 @@
       </div>
       <!-- Contenido -->
       <div class="contet_page topSpace">
-        <!--formulario de usuarios-->
+        <!-- Formulario de usuarios -->
         <form action="" method="post">
           <label>Usuario :</label>
           <input id="username" name="username" placeholder="username" type="text">
@@ -45,39 +47,64 @@
           </select> 
           <br><br>
           
-          <!--botton-->
+          <!-- Boton -->
           <input name="guardar" id="guardar" type="submit" value=" Crear ">
           <span><?php echo $error_add; ?></span>
         </form>
-        <!--tabla de usuarios form-->
-        <?php include('./scripts/users_table.php'); ?>
+        <br>
+
+        <!-- Barra de busqueda -->
+        <form actions="" method="post">
+          <input id="busqueda" name="busqueda" placeholder="" type="text">
+          <input name="btn_buscar" type="submit" value=" Buscar ">
+        </form>
+
+        <!-- Tabla de usuarios form -->
         <table>  
           <thead>
             <tr>
               <th>Usuario</th>  
               <th>Nombre</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Estado</th>
+              <th></th>
             </tr>
           <thead>
           <tbody>
             <?php  
               while ($row = mysqli_fetch_array($rs_result)) {
                 echo "<tr>"; 
-                echo "<td>".$row['username']."</td>"; 
+                echo "<td>".$row['username']."</td>";
                 echo "<td>".$row['name']."</td>";
+                echo "<td>".$row['email']."</td>";
+                if($row['role'] == 1){
+                  echo "<td>Administrador</td>"; 
+                } else if($row['role'] == 2){
+                  echo "<td>Sub administrador</td>"; 
+                } else if($row['role'] == 3){
+                  echo "<td>Empleado</td>"; 
+                }
+                if($row['active'] == 1){
+                  echo "<td>Activo</td>"; 
+                } else {
+                  echo "<td>Desactivado</td>"; 
+                }
+                echo '<td><input name="guardar" type="submit" value=" Editar "></td>';
                 echo "</tr>"; 
               }; 
             ?>
           </tbody>  
         </table>
-        <?php  
-          $sql = "SELECT COUNT(id) FROM users";  
-          $rs_result = mysqli_query($conexion, $sql);  
+        <?php
+          $rs_result = mysqli_query($conexion, $sql_temp);  
           $row = mysqli_fetch_array($rs_result);  
           $total_records = $row[0];  
           $total_pages = ceil($total_records / $limit);  
           $pagLink = "<div class='pagination'>";  
-          for ($i=1; $i<=$total_pages; $i++) {  
-            $pagLink .= "<a href='./users.php?page=".$i."'>".$i."</a>";  
+          for($i = 0; $i < $total_pages; $i++) {
+            $num = $i + 1;
+            $pagLink .= "<a href='./users.php?page=".$num."'>".$num."</a>";  
           };
           echo $pagLink . "</div>";  
         ?>
