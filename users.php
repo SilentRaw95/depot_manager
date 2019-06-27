@@ -54,12 +54,13 @@
         <br>
 
         <!-- Barra de busqueda -->
-        <form actions="" method="post">
+        <form actions="" method="get">
           <input id="busqueda" name="busqueda" placeholder="" type="text">
-          <input name="btn_buscar" type="submit" value=" Buscar ">
+          <input name="btn_buscar" type="submit" value="Buscar">
         </form>
 
         <!-- Tabla de usuarios form -->
+        <p>Resultados de: <?php echo $_GET['busqueda']; ?></p>
         <table>  
           <thead>
             <tr>
@@ -104,7 +105,11 @@
           $pagLink = "<div class='pagination'>";  
           for($i = 0; $i < $total_pages; $i++) {
             $num = $i + 1;
-            $pagLink .= "<a href='./users.php?page=".$num."'>".$num."</a>";  
+            if(isset($_GET['busqueda'])){
+              $pagLink .= "<a href='./users.php?page=".$num."+&busqueda=".$_GET['busqueda']."'>".$num."</a>";  
+            } else {
+              $pagLink .= "<a href='./users.php?page=".$num."'>".$num."</a>";  
+            }
           };
           echo $pagLink . "</div>";  
         ?>
