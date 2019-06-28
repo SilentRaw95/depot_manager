@@ -1,6 +1,6 @@
 <?php
   include('config.php');
-  $limit = 2;
+  $limit = 10;
 
   if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
   if (isset($_GET['busqueda'])) { $search = $_GET['busqueda']; } else { $search = ''; };

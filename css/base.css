@@ -1,71 +1,7 @@
-/* Base */
-.bg {
-    background-color: #b5b5b5;
-}
 .contenedor {
     max-width: 1100px;
     margin: auto;
 }
-.borde {
-    background-color: #66afe6;
-    border-radius: 10px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #333;
-}
-.topSpace {
-    margin-top: 5px;
-}
-
-/* header */
-.logo {
-    width: 150px;
-    margin: 20px;
-    vertical-align: middle;
-}
-.banner_tutulo {
-    display: inline-block;
-    font-family: Helvetica;
-    margin: 0;
-}
-
-/* Menu */
-.menusup{
-    background-color: #333;
-    overflow: hidden;
-    border-radius: 7px;
-}
-.menusup a{
-    float: left;
-    color: #f2f2f2;
-    font-family: Helvetica;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-.menusup a:hover {
-    background-color: #ddd;
-    color: black;
-}
-.menusup a.active{
-    background-color: #4caf50;
-    color: white;
-}
-
-/* contenido */
-.contet_page {
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #333;
-}
-
-/* Footer */
-.footer_text {
-    font-family: Helvetica;
-    font-size: 20spx;
-    margin: 10px;
+.espacio {
+    margin-top: 25px !important;
 }

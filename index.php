@@ -7,21 +7,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login Form in PHP with Session</title>
-    <link href="./css/login.css" rel="stsylesheet" type="text/css">
+    <title>Depot Manager - Login</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="./css/login.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <div id="login">
-      <h2>Login Form</h2>
-      <form action="" method="post">
-        <label>UserName :</label>
-        <input id="name" name="username" placeholder="username" type="text">
-        <label>Password :</label>
-        <input id="password" name="password" placeholder="**********" type="password"><br><br>
-        <input name="submit" type="submit" value=" Login ">
-        <span><?php echo $error; ?></span>
-      </form>
-    </div>
+    <form class="login_container" action="" method="post">
+      <h1 class="h3 mb-3 font-weight-normal">Depot Manager</h1>
+
+      <div class="form-group">
+        <input class="form-control" id="name" name="username" placeholder="Username" type="text">
+        <input class="form-control" id="password" name="password" placeholder="Contraseña" type="password">
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <input class="btn btn-lg btn-primary btn-block" name="submit" type="submit" value="Login">
+        </div>
+      </div>
+      <p class="text-muted"><?php echo $error; ?></p>
+    </form>
   </body>
 </html>
