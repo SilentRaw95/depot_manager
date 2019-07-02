@@ -14,6 +14,7 @@
   </head>
   <body>
     <form class="login_container" action="" method="post">
+      <img src="./img/DM.PNG" class="img-fluid" alt="Responsive image">
       <h1 class="h3 mb-3 font-weight-normal">Depot Manager</h1>
 
       <div class="form-group">

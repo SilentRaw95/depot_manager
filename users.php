@@ -2,7 +2,7 @@
   include('./scripts/profile_info.php');
   include('./scripts/create.php');
   include('./scripts/session.php');
-  include('./scripts/users_table.php');
+  include('./scripts/editar_usuario.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,9 @@
 
     <link rel="stylesheet" href="./css/base.css" type="text/css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,7 +27,7 @@
           <?php
             if($rol == 1){
               echo '<li class="nav-item active">';
-              echo '<a class="nav-link" href="./users.php">Usuarios</a>';
+              echo '<a class="nav-link" href="#">Usuarios</a>';
               echo '</li>';
             }
           ?>
@@ -92,6 +94,7 @@
       </form>
 
       <!--Tabla de usuarios-->
+      <?php include('./scripts/users_table.php'); ?>
       <table class="table espacio">  
         <thead class="thead-dark">
           <tr>
@@ -108,8 +111,11 @@
             while ($row = mysqli_fetch_array($rs_result)) {
               echo "<tr>"; 
               echo "<th scope='row'>".$row['username']."</th>";
+              //nombre
               echo "<td>".$row['name']."</td>";
+              //email
               echo "<td>".$row['email']."</td>";
+              //role
               if($row['role'] == 1){
                 echo "<td>Administrador</td>"; 
               } else if($row['role'] == 2){
@@ -117,12 +123,19 @@
               } else if($row['role'] == 3){
                 echo "<td>Empleado</td>"; 
               }
+              //activo
               if($row['active'] == 1){
                 echo "<td>Activo</td>"; 
               } else {
                 echo "<td>Desactivado</td>"; 
               }
-              echo '<td><input class="btn btn-primary" name="guardar" type="submit" value=" Editar"></td>';
+              //role
+              if($row['role'] != 1){
+                $parametros = $row['id'].','.'\''.$row['username'].'\''.','.'\''.$row['password'].'\''.','.'\''.$row['name'].'\''.','.'\''.$row['email'].'\''.','.$row['role'].','.$row['active'];
+                echo '<td><input class="btn btn-primary" type="button" value="Editar" onclick="editarUsusario('.$parametros.')"></td>';
+              } else {
+                echo "<td></td>"; 
+              }
               echo "</tr>"; 
             }; 
           ?>
@@ -144,7 +157,82 @@
         };
         echo $pagLink . "</div>";  
       ?>
+
+      <!-- Modal de editar -->
+      <div class="modal fade" id="miModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <!-- Contenido del modal -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Editar usuario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="" method="post">
+              <div class="modal-body">
+                <div class="form-group">
+                  <input id="modal_id" name="modal_id" class="form-control" type="text" style="display: none;">
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="modal_username">Usuario:</label>
+                    <input id="modal_username" name="modal_username" class="form-control" type="text">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="modal_password">Contraseña:</label>
+                    <input id="modal_password" name="modal_password" class="form-control" type="password">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="modal_name">Nombre:</label>
+                    <input id="modal_name" name="modal_name" class="form-control" type="text">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="modal_email">Email:</label>
+                    <input id="modal_email" name="modal_email" class="form-control" type="email">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="modal_rol">Rol:</label>
+                    <select id="modal_rol" name="modal_rol" class="form-control">
+                      <option value="2">Sub administrador</option>
+                      <option value="3">Empleado</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="modal_active">Activo:</label>
+                    <select id="modal_active" name="modal_active" class="form-control">
+                      <option value="1">Si</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input class="btn btn-primary" name="save_edit" id="save_edit" type="submit" value="Guardar">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+    <script>
+      function editarUsusario(id, username, password, name, email, role, active) {
+        console.log(id, username, password, name, email, role, active);
+        $("#miModal").modal("show");
+        document.getElementById("modal_username").value = ""+username;
+        document.getElementById("modal_password").value = ""+password;
+        document.getElementById("modal_name").value = ""+name;
+        document.getElementById("modal_email").value = ""+email;
+        $("#modal_rol").val(""+role);
+        $("#modal_active").val(""+active);
+        $("#modal_id").val(id);
+      };
+    </script>
   </body>
   <footer class="page-footer font-small blue pt-4">
     <div class="footer-copyright text-center py-3">Depot manager © 2019</div>

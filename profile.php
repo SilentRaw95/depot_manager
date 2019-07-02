@@ -2,38 +2,46 @@
   include('./scripts/profile_info.php');
   include('./scripts/session.php');
 ?>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Depot manager - Perfil</title>
+    <title>Depot manager - Usuarios</title>
 
-    <link href="./css/base.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./css/base.css" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
   </head>
-  <body class="bg">
-    <div class="contenedor">
-      <!-- Banner -->
-      <div class="borde banner">
-        <!--<img class="logo" src="./img/joy_emoji.jpg"/>-->
-        <h2 class="banner_tutulo">Perfil</h2>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Depot Manager</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Adminstrador</a>
+          </li>
+          <?php
+            if($rol == 1){
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="./users.php">Usuarios</a>';
+              echo '</li>';
+            }
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./scripts/logout.php">Cerrar session</a>
+          </li>
+        </ul>
       </div>
-      <!-- Menu -->
-      <div class="menusup topSpace">
-        <a href="#" class="active">Perfil</a>
-        <?php if($rol == 1){
-          echo '<a href="./users.php">Usuarios</a>';
-        } ?>
-        <a href="#">Productos</a>
-        <a href="./scripts/logout.php">Cerrar session</a>
-      </div>
-      <!-- Contenido -->
-      <div class="contet_page topSpace">
-        <p>Hola: <?php echo $nombre; ?></p>
-      </div>
-      <!-- Footer -->
-      <div class="borde topSpace">
-        <p class="footer_text">Depot manager © 2019</p>
-      </div>
+    </nav>
+    <!-- Contenido -->
+    <div class="contenedor espacio">
     </div>
   </body>
+  <footer class="page-footer font-small blue pt-4">
+    <div class="footer-copyright text-center py-3">Depot manager © 2019</div>
+  </footer>
 </html>
