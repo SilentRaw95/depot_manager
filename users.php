@@ -32,8 +32,22 @@
             }
           ?>
           <li class="nav-item">
-            <a class="nav-link" href="#">Productos</a>
+            <a class="nav-link" href="./inventario.php">Inventario</a>
           </li>
+          <?php
+            if($rol == 1 || $rol == 2){
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="./registers.php">Registros</a>';
+              echo '</li>';
+            }
+          ?>
+          <?php
+            if($rol == 3){
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="./sell.php">Vender</a>';
+              echo '</li>';
+            }
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="./scripts/logout.php">Cerrar session</a>
           </li>
@@ -144,9 +158,9 @@
       <?php
         $rs_result = mysqli_query($conexion, $sql_temp);  
         $row = mysqli_fetch_array($rs_result);  
-        $total_records = $row[0];  
+        $total_records = $row[0];
         $total_pages = ceil($total_records / $limit);  
-        $pagLink = "<div class='pagination'>";  
+        $pagLink = "<div class='pagination'>";
         for($i = 0; $i < $total_pages; $i++) {
           $num = $i + 1;
           if(isset($_GET['busqueda'])){
