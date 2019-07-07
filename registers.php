@@ -18,8 +18,8 @@
       <a class="navbar-brand" href="#">Depot Manager</a>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Perfil</a>
+          <li class="nav-item">
+            <a class="nav-link" href="./profile.php">Adminstrador</a>
           </li>
           <?php
             if($rol == 1){
@@ -29,12 +29,12 @@
             }
           ?>
           <li class="nav-item">
-            <a class="nav-link" href="./inventario.php">Inventario</a>
+            <a class="nav-link" href="#">Inventario</a>
           </li>
           <?php
             if($rol == 1 || $rol == 2){
-              echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="./registers.php">Registros</a>';
+              echo '<li class="nav-item active">';
+              echo '<a class="nav-link" href="#">Registros</a>';
               echo '</li>';
             }
           ?>
@@ -51,8 +51,29 @@
         </ul>
       </div>
     </nav>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="venta-tab" data-toggle="tab" href="#venta" role="tab" aria-controls="products" aria-selected="true">Venta</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="bodega-tab" data-toggle="tab" href="#bodega" role="tab" aria-controls="bodega" aria-selected="false">Bodega</a>
+      </li>
+    </ul>
     <!-- Contenido -->
-    <div class="contenedor espacio">
+    <div class="tab-content">
+      <!-- Venta -->
+      <div class="tab-pane active" id="venta" role="tabpanel" aria-labelledby="venta-tab">
+        <div class="contenedor espacio">
+            
+        </div>
+      </div>
+
+      <!-- Bodega -->
+      <div class="tab-pane" id="bodega" role="tabpanel" aria-labelledby="bodega-tab">
+        <div class="contenedor espacio">
+        </div>
+      </div>
     </div>
   </body>
   <footer class="page-footer font-small blue pt-4">

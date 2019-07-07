@@ -23,7 +23,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Adminstrador</a>
+            <a class="nav-link" href="./profile.php">Perfil</a>
           </li>
           <?php
             if($rol == 1){
