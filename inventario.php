@@ -3,6 +3,8 @@
   include('./scripts/session.php');
   include('./scripts/create_category.php');
   include('./scripts/editar_categoria.php');
+  include('./scripts/create_products.php');
+  include('./scripts/editar_products.php');
 ?>
 <html lang="en">
   <head>
@@ -66,8 +68,190 @@
     <div class="tab-content">
       <!-- Products -->
       <div class="tab-pane active" id="products" role="tabpanel" aria-labelledby="products-tab">
+        <div class="contenedor espacio">
+          <!--formulario-->
+          <?php include('./scripts/category_table.php'); ?>
+          <form action="" method="post">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="name">Nombre:</label>
+                <input id="name" name="name" class="form-control" type="text">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="categoria">Categoria:</label>
+                <select id="categoria" name="categoria" class="form-control">
+                  <?php  
+                    while ($row = mysqli_fetch_array($rs_result)) {
+                      echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                    }; 
+                  ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="precio">Precio:</label>
+                <input id="precio" name="precio" class="form-control" type="text">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="stock">Stock:</label>
+                <input id="stock" name="stock" class="form-control" type="text">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="bodega">Bodega:</label>
+                <input id="bodega" name="bodega" class="form-control" type="text">
+              </div>
+            </div>
 
+            <!-- Boton -->
+            <div class="form-group">
+              <input class="btn btn-primary col-md-12" name="crear_producto" id="crear_producto" type="submit" value="Crear">
+            </div>
+          </form>
+
+          <!-- Barra de busqueda -->
+          <form actions="" method="get">
+            <div class="form-row">
+              <input id="busqueda" name="busqueda" class="form-control col-md-10" type="text">
+              <input class="btn btn-primary col-md-2" name="btn_buscar" type="submit" value="Buscar">
+            </div>
+            <!-- Tabla de usuarios form -->
+            <?php
+              if(isset($_GET['busqueda'])){
+                echo "<span>Resultados de: ".$_GET['busqueda']."</span>";
+              }
+            ?>
+          </form>
+
+          <!-- Tabla de productos -->
+          <?php include('./scripts/products_table.php'); ?>
+          <table class="table espacio">  
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Bodega</th>
+                <th scope="col"></th>
+              </tr>
+            <thead>
+            <tbody>
+              <?php  
+                while ($row = mysqli_fetch_array($rs_resultP)) {
+                  echo "<tr>"; 
+                  //id
+                  echo "<th scope='row'>".$row['id']."</th>";
+                  //name
+                  echo "<th>".$row['name']."</th>";
+                  //categoria
+                  echo "<th>".$row['categoria_name']."</th>";
+                  //precio
+                  echo "<th>".$row['price']."</th>";
+                  //stock
+                  echo "<th>".$row['stock']."</th>";
+                  //bodega
+                  echo "<th>".$row['cell']."</th>";
+                  //role
+                  $parametros = $row['id'].','.'\''.$row['name'].'\''.','.'\''.$row['category_id'].'\''.','.'\''.$row['price'].'\''.','.'\''.$row['stock'].'\''.','.'\''.$row['cell'].'\'';
+                  echo '<td><input class="btn btn-primary" type="button" value="Editar" onclick="editarProducts('.$parametros.')"></td>';
+                  echo "</tr>"; 
+                }; 
+              ?>
+            </tbody>
+          </table>
+          <?php
+            $rs_result = mysqli_query($conexion, $sql_temp);  
+            $row = mysqli_fetch_array($rs_result);  
+            $total_records = $row[0];
+            $total_pages = ceil($total_records / $limit);  
+            $pagLink = "<div class='pagination'>";
+            for($i = 0; $i < $total_pages; $i++) {
+              $num = $i + 1;
+              if(isset($_GET['busqueda'])){
+                $pagLink .= "<a href='./users.php?page=".$num."+&busqueda=".$_GET['busqueda']."'>".$num."</a>";  
+              } else {
+                $pagLink .= "<a href='./users.php?page=".$num."'>".$num."</a>";  
+              }
+            };
+            echo $pagLink . "</div>";  
+          ?>
+          <script>
+            function editarProducts(id, name, catgory_id, stock, price, cell) {
+              console.log(id, catgory_id, name, stock, price, cell);
+              $("#modalProduct").modal("show");
+              $("#prod_id").val(id);
+              $("#prod_categoria_id").val(catgory_id);
+              $("#prod_name").val(name);
+              $("#prod_stock").val(stock);
+              $("#prod_price").val(price);
+              $("#prod_cell").val(cell);
+            };
+          </script>
+        </div>
+
+        <!-- Modal de editar -->
+        <div class="modal fade" id="modalProduct" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <!-- Contenido del modal -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Editar usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="" method="post">
+                <div class="modal-body">
+                  <div class="form-group">
+                    <input id="prod_id" name="prod_id" class="form-control" type="text" style="display: none;">
+                  </div>
+                  <!-- Formulario -->
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="prod_name">Nombre:</label>
+                      <input id="prod_name" name="prod_name" class="form-control" type="text">
+                    </div>
+                    <?php include('./scripts/category_table.php'); ?>
+                    <div class="form-group col-md-6">
+                      <label for="prod_categoria_id">Categoria:</label>
+                      <select id="prod_categoria_id" name="prod_categoria_id" class="form-control">
+                        <?php  
+                          while ($row = mysqli_fetch_array($rs_result)) {
+                            echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                          }; 
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="prod_stock">Stock:</label>
+                      <input id="prod_stock" name="prod_stock" class="form-control" type="number">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="prod_price">Categoria:</label>
+                      <input id="prod_price" name="prod_price" class="form-control" type="number">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="prod_cell">Bodega:</label>
+                      <input id="prod_cell" name="prod_cell" class="form-control" type="text">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <input class="btn btn-primary" name="save_edit_prod" id="save_edit_prod" type="submit" value="Guardar">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
+
       <!-- Categories -->
       <div class="tab-pane" id="categories" role="tabpanel" aria-labelledby="categories-tab">
         <div class="contenedor espacio">
@@ -79,6 +263,7 @@
             </div>
           </form>
 
+          <!--Tabla-->
           <?php include('./scripts/category_table.php'); ?>
           <table class="table espacio">  
             <thead class="thead-dark">
