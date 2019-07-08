@@ -29,7 +29,7 @@
             }
           ?>
           <li class="nav-item">
-            <a class="nav-link" href="#">Inventario</a>
+            <a class="nav-link" href="inventario.php">Inventario</a>
           </li>
           <?php
             if($rol == 1 || $rol == 2){
@@ -57,7 +57,7 @@
         <a class="nav-link active" id="venta-tab" data-toggle="tab" href="#venta" role="tab" aria-controls="products" aria-selected="true">Venta</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="bodega-tab" data-toggle="tab" href="#bodega" role="tab" aria-controls="bodega" aria-selected="false">Bodega</a>
+        <a class="nav-link" id="almacen-tab" data-toggle="tab" href="#almacen" role="tab" aria-controls="almacen" aria-selected="false">Alamacen</a>
       </li>
     </ul>
     <!-- Contenido -->
@@ -65,13 +65,61 @@
       <!-- Venta -->
       <div class="tab-pane active" id="venta" role="tabpanel" aria-labelledby="venta-tab">
         <div class="contenedor espacio">
-            
+          
         </div>
       </div>
 
-      <!-- Bodega -->
-      <div class="tab-pane" id="bodega" role="tabpanel" aria-labelledby="bodega-tab">
+      <!-- Almacen -->
+      <div class="tab-pane" id="almacen" role="tabpanel" aria-labelledby="almacen-tab">
         <div class="contenedor espacio">
+          <!-- Barra de busqueda -->
+          <form actions="" method="get">
+            <div class="form-row">
+              <input id="busqueda" name="busqueda" class="form-control col-md-10" type="text">
+              <input class="btn btn-primary col-md-2" name="btn_buscar" type="submit" value="Buscar">
+            </div>
+            <!-- Tabla de usuarios form -->
+            <?php
+              if(isset($_GET['busqueda'])){
+                echo "<span>Resultados de: ".$_GET['busqueda']."</span>";
+              }
+            ?>
+          </form>
+
+          <!-- Tabla de productos -->
+          <?php include('./scripts/registro_almacen.php'); ?>
+          <table class="table espacio">  
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Empleado</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Accion</th>
+              </tr>
+            <thead>
+            <tbody>
+              <?php  
+                while ($row = mysqli_fetch_array($rs_result)) {
+                  echo "<tr>"; 
+                  //id
+                  echo "<th scope='row'>".$row['id']."</th>";
+                  //username
+                  echo "<th>".$row['empleado']."</th>";
+                  //productname
+                  echo "<th>".$row['producto']."</th>";
+                  //cantidad
+                  echo "<th>".$row['cantidad']."</th>";
+                  //fecha
+                  echo "<th>".$row['fecha']."</th>";
+                  //accion
+                  echo "<th>".$row['accion']."</th>";
+                  echo "</tr>"; 
+                }; 
+              ?>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

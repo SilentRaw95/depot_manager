@@ -7,6 +7,7 @@
   $resultado = mysqli_query($conexion, $consulta);
   $datos = mysqli_fetch_array($resultado);
   
+  $perfil_id = $datos['id'];
   $nombre = $datos['name'];
   $rol = $datos['role'];
 

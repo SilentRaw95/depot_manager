@@ -20,9 +20,11 @@
       $sql = "INSERT INTO products (category_id, name, stock, price, cell) VALUES ".$values;
 
       if(mysqli_query($conexion, $sql)){
-        //$error_add = "Records inserted successfully.";
-      } else{
-        //$error_add = "ERROR: Could not able to execute". mysqli_error($conexion);
+        $temp = mysqli_insert_id($conexion);
+        $almacen_values = "($perfil_id, $temp, $val_stock, '".date("d-m-Y")." ".date("h:i:sa")."', 'Producto a&ntilde;adido')";
+        $sql_almacen = "INSERT INTO almacen (empleado, producto, cantidad, fecha, accion) VALUES ".$almacen_values;
+      
+        mysqli_query($conexion, $sql_almacen);
       }
     }
   } 

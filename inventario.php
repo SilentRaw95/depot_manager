@@ -170,9 +170,9 @@
             for($i = 0; $i < $total_pages; $i++) {
               $num = $i + 1;
               if(isset($_GET['busqueda'])){
-                $pagLink .= "<a href='./users.php?page=".$num."+&busqueda=".$_GET['busqueda']."'>".$num."</a>";  
+                $pagLink .= "<a href='./inventario.php?page=".$num."+&busqueda=".$_GET['busqueda']."'>".$num."</a>";  
               } else {
-                $pagLink .= "<a href='./users.php?page=".$num."'>".$num."</a>";  
+                $pagLink .= "<a href='./inventario.php?page=".$num."'>".$num."</a>";  
               }
             };
             echo $pagLink . "</div>";  
@@ -211,7 +211,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="prod_name">Nombre:</label>
-                      <input id="prod_name" name="prod_name" class="form-control" type="text">
+                      <input id="prod_name" name="prod_name" class="form-control" type="text" disabled>
                     </div>
                     <?php include('./scripts/category_table.php'); ?>
                     <div class="form-group col-md-6">
