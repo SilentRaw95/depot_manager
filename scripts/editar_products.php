@@ -13,14 +13,40 @@
     
     $sql_values = "name = '".$edit_name."', category_id = ".$edit_categoria.", stock = ".$edit_stock.", price = ".$edit_price.", cell = '".$edit_cell."'";
     $sql_update = "UPDATE products SET ".$sql_values." WHERE id = ".$edit_id;
-    echo "<script>console.log( 'Debug Objects: " . $sql_update . "' );</script>";
+
+    //consultar viejos datos
+    $consulta = "SELECT * FROM products WHERE id = '$edit_id' LIMIT 1";
+    $resultado = mysqli_query($conexion, $consulta);
+    $datos = mysqli_fetch_array($resultado);
+  
+    $og_category = $datos['category_id'];
+    $og_stock = $datos['stock'];
+    $og_price = $datos['price'];
+    $og_cell = $datos['cell'];
 
     if(mysqli_query($conexion, $sql_update)){
-      $error_add2 = "sdsdsdsdsddsds";
-      //$error_add = "Records inserted successfully.";
-    } else {
-      $error_add2 = "";
-      //$error_add = "ERROR: Could not able to execute". mysqli_error($conexion);
+      $accion = "";
+      $val_stock = $og_stock;
+
+      if($og_category != $edit_categoria){
+        $accion = $accion."Se cambio la categoria"."<br />";
+      }
+      if($og_stock != $edit_stock){
+        $accion = $accion."Se cambio el stock"."<br />";
+        $val_stock = $edit_stock;
+      }
+      if($og_price != $edit_price){
+        $accion = $accion."Se cambio el precio"."<br />";
+      }
+      if($og_cell != $edit_cell){
+        $accion = $accion."Se cambio la bodega"."<br />";
+      }
+
+      $almacen_values = "($perfil_id, $edit_id, $val_stock, '".date("d-m-Y")." ".date("h:i:sa")."', '$accion')";
+      $sql_almacen = "INSERT INTO almacen (empleado, producto, cantidad, fecha, accion) VALUES ".$almacen_values;
+      
+      echo $sql_almacen;
+      mysqli_query($conexion, $sql_almacen);
     }
   }
 ?>

@@ -228,7 +228,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="prod_name">Nombre:</label>
-                      <input id="prod_name" name="prod_name" class="form-control" type="text" disabled>
+                      <input id="prod_name" name="prod_name" class="form-control" type="text" readonly="true">
                     </div>
                     <?php include('./scripts/category_table.php'); ?>
                     <div class="form-group col-md-6">
@@ -248,7 +248,7 @@
                       <input id="prod_stock" name="prod_stock" class="form-control" type="number">
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="prod_price">Categoria:</label>
+                      <label for="prod_price">Precio:</label>
                       <input id="prod_price" name="prod_price" class="form-control" type="number">
                     </div>
                   </div>
