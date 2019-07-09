@@ -19,8 +19,8 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <!-- Perfil -->
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Perfil</a>
+          <li class="nav-item">
+            <a class="nav-link" href="./profile.php">Perfil</a>
           </li>
           <!-- Usuario -->
           <?php
@@ -42,15 +42,15 @@
           <?php
             if($rol == 1 || $rol == 2){
               echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="./alamacen.php">Alamacen</a>';
+              echo '<a class="nav-link" href="almacen.php">Alamacen</a>';
               echo '</li>';
             }
           ?>
           <!-- Registro -->
           <?php
             if($rol == 1 || $rol == 2){
-              echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="./registro.php">Registro</a>';
+              echo '<li class="nav-item active">';
+              echo '<a class="nav-link" href="#">Registro</a>';
               echo '</li>';
             }
           ?>
@@ -68,7 +68,7 @@
         </ul>
       </div>
     </nav>
-    <!-- Contenido -->
+    <!-- Cantidad -->
     <div class="contenedor espacio">
     </div>
   </body>

@@ -22,9 +22,11 @@
       <a class="navbar-brand" href="#">Depot Manager</a>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <!-- Perfil -->
           <li class="nav-item">
             <a class="nav-link" href="./profile.php">Perfil</a>
           </li>
+          <!-- Usuario -->
           <?php
             if($rol == 1){
               echo '<li class="nav-item">';
@@ -32,16 +34,31 @@
               echo '</li>';
             }
           ?>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Inventario</a>
-          </li>
+          <!-- Inventario -->
           <?php
-            if($rol == 1 || $rol == 2){
-              echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="./registers.php">Registros</a>';
+            if($rol == 1){
+              echo '<li class="nav-item active">';
+              echo ' <a class="nav-link" href="#">Inventario</a>';
               echo '</li>';
             }
           ?>
+          <!-- Almacen -->
+          <?php
+            if($rol == 1 || $rol == 2){
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="./alamacen.php">Alamacen</a>';
+              echo '</li>';
+            }
+          ?>
+          <!-- Registro -->
+          <?php
+            if($rol == 1 || $rol == 2){
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="./registro.php">Registro</a>';
+              echo '</li>';
+            }
+          ?>
+          <!-- Vender -->
           <?php
             if($rol == 3){
               echo '<li class="nav-item">';

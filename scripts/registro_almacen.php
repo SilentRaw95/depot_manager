@@ -14,11 +14,11 @@
 
   if(isset($search)){
     $sql = "SELECT $values_sql FROM almacen p1 $inner_join WHERE p3.name LIKE '%".$search."%' LIMIT $start_from, $limit"; 
-    $sql_temp = "SELECT COUNT(id) FROM almacen WHERE name LIKE '%".$search."%'"; 
+    $sql_temp = "SELECT COUNT(p1.id) FROM almacen p1 $inner_join WHERE p3.name LIKE '%".$search."%'"; 
   } else {
     $sql = "SELECT $values_sql FROM almacen p1 $inner_join LIMIT $start_from, $limit"; 
-    $sql_temp = "SELECT COUNT(id) FROM almacen"; 
+    $sql_temp = "SELECT COUNT(p1.id) FROM almacen p1"; 
   }
-  echo "<script>console.log( " . $sql . " );</script>";
+  //echo "<script>console.log( " . $sql_temp . " );</script>";
   $rs_result = mysqli_query($conexion, $sql);
 ?>
