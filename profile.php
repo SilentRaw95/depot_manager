@@ -70,6 +70,9 @@
     </nav>
     <!-- Contenido -->
     <div class="contenedor espacio">
+      <?php
+        echo "<p>$nombre</p>"
+      ?>
     </div>
   </body>
   <footer class="page-footer font-small blue pt-4">

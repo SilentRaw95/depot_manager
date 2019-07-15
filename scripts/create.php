@@ -12,11 +12,11 @@
     $val_email = empty($_POST['email']);
     $val_rol = empty($_POST['rol']);
     //variables
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $rol = intval($_POST['rol']);
+    $username_b = $_POST['username'];
+    $password_b = $_POST['password'];
+    $name_b = $_POST['name'];
+    $email_b = $_POST['email'];
+    $rol_b = intval($_POST['rol']);
 
     //validacion
     $validation = TRUE;
@@ -37,7 +37,7 @@
     }
 
     if($validation == TRUE){
-      $sql = "INSERT INTO users (username, password, name, email, role, active) VALUES ('$username', '$password', '$name', '$email', $rol, 1)";
+      $sql = "INSERT INTO users (username, password, name, email, role, active) VALUES ('$username_b', '$password_b', '$name_b', '$email_b', $rol_b, 1)";
 
       if(mysqli_query($conexion, $sql)){
         $error_add = "Records inserted successfully.";
