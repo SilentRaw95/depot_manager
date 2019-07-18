@@ -44,7 +44,7 @@
           <?php
             if($rol == 1 || $rol == 2){
               echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="./alamacen.php">Alamacen</a>';
+              echo '<a class="nav-link" href="./almacen.php">Almacen</a>';
               echo '</li>';
             }
           ?>
@@ -119,7 +119,7 @@
               //bodega
               echo "<th>".$row['cell']."</th>";
               //cantidad a añadir
-              echo '<td><input id="field_'.$row['id'].'" class="form-control custominput" type="number"></td>';
+              echo '<td><input id="field_'.$row['id'].'" class="form-control custominput" type="number" min="1"></td>';
               //boton añadir
               $parametros = $row['id'].','.$row['price'].','.$row['stock'].','.'\''.$row['name'].'\'';
               echo '<td>
@@ -246,7 +246,7 @@
             estructura = estructura + '<input class="form-control" type="text" value="'+carrito[i].price+'" readonly="true">';
             estructura = estructura + '</div>';
             estructura = estructura + '<div class="form-group col-md-2">';
-            estructura = estructura + '<input class="form-control" onchange="actualizarCantidad('+i+')" id="cant_'+i+'" name="cant_'+i+'" type="text" value="'+carrito[i].cantidad+'">';
+            estructura = estructura + '<input class="form-control" onchange="actualizarCantidad('+i+')" id="cant_'+i+'" name="cant_'+i+'" type="number" min="1" value="'+carrito[i].cantidad+'">';
             estructura = estructura + '</div>';
             estructura = estructura + '<div class="form-group col-md-2">';
             estructura = estructura + '<input class="form-control" type="text" id="sub_'+i+'" name="sub_'+i+'" value="'+carrito[i].sub_total+'" readonly="true">';

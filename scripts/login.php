@@ -14,12 +14,17 @@
 
       $id = mysqli_fetch_array($resultado);
       $id_result = $id['id'];
+      $active_result = $id['active'];
 
       if($id_result != ""){
-        $_SESSION['login_user'] = $id_result; // Initializing Session
-        header("location: profile.php"); // Redirecting To Profile Page 
+        if($active_result == 1){
+          $_SESSION['login_user'] = $id_result; // Initializing Session
+          header("location: profile.php"); // Redirecting To Profile Page 
+        } else {
+          $error = "Usuario esta desactivado"; 
+        }
       } else {
-        $error = "No hay usuario, ahora el fbi ira por ti"; 
+        $error = "Usuario y/o contraseña incorrecta"; 
       }
     } 
     mysqli_close($conexion); // Closing Connection 

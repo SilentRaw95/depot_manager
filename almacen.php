@@ -42,7 +42,7 @@
           <?php
             if($rol == 1 || $rol == 2){
               echo '<li class="nav-item active">';
-              echo '<a class="nav-link" href="#">Alamacen</a>';
+              echo '<a class="nav-link" href="#">Almacen</a>';
               echo '</li>';
             }
           ?>
@@ -127,9 +127,9 @@
         for($i = 0; $i < $total_pages; $i++) {
           $num = $i + 1;
           if(isset($_GET['busqueda'])){
-            $pagLink .= "<a href='./alamacen.php?page=".$num."+&busqueda=".$_GET['busqueda']."'>".$num."</a>";  
+            $pagLink .= "<a href='./almacen.php?page=".$num."+&busqueda=".$_GET['busqueda']."'>".$num."</a>";  
           } else {
-            $pagLink .= "<a href='./alamacen.php?page=".$num."'>".$num."</a>";  
+            $pagLink .= "<a href='./almacen.php?page=".$num."'>".$num."</a>";  
           }
         };
         echo $pagLink . "</div>";  

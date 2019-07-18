@@ -45,7 +45,7 @@
       $almacen_values = "($perfil_id, $edit_id, $val_stock, '".date("d-m-Y")." ".date("h:i:sa")."', '$accion')";
       $sql_almacen = "INSERT INTO almacen (empleado, producto, cantidad, fecha, accion) VALUES ".$almacen_values;
       
-      echo $sql_almacen;
+      //echo $sql_almacen;
       mysqli_query($conexion, $sql_almacen);
     }
   }

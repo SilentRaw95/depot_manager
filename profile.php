@@ -42,7 +42,7 @@
           <?php
             if($rol == 1 || $rol == 2){
               echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="./alamacen.php">Alamacen</a>';
+              echo '<a class="nav-link" href="./almacen.php">Almacen</a>';
               echo '</li>';
             }
           ?>

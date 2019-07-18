@@ -71,67 +71,33 @@
     </nav>
     <!-- Cantidad -->
     <div class="contenedor espacio">
-      <!-- Barra de busqueda -->
-      <form actions="" method="get">
-        <div class="form-row">
-          <input id="busqueda" name="busqueda" class="form-control col-md-10" type="text">
-          <input class="btn btn-primary col-md-2" name="btn_buscar" type="submit" value="Buscar">
-        </div>
-        <!-- Tabla de usuarios form -->
-        <?php
-        if (isset($_GET['busqueda'])) {
-          echo "<span>Resultados de: " . $_GET['busqueda'] . "</span>";
-        }
-        ?>
-      </form>
-      <?php include('./scripts/registros_table.php'); ?>
+      <?php include('./scripts/registros_prod.php'); ?>
       <table class="table espacio">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Empleado</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Total</th>
-            <th scope="col"></th>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Subtotal</th>
           </tr>
           <thead>
           <tbody>
             <?php
-            while ($row = mysqli_fetch_array($rs_result)) {
-              echo "<tr>";
-              //id
-              echo "<th scope='row'>" . $row['id'] . "</th>";
-              //empleado
-              echo "<th>" . $row['empleado'] . "</th>";
-              //fecha
-              echo "<th>" . $row['fecha'] . "</th>";
-              //total
-              echo "<th>" . $row['total'] . "</th>";
-              //detalle
-              echo '<td>
-                <a class="btn btn-primary" href= "./registro_prod.php?reg_prod='.$row['id'].'">Ver orden</button>
-              </td>';
-              echo "</tr>";
-            };
+              while ($row = mysqli_fetch_array($rs_result)) {
+                echo "<tr>";
+                //Producto
+                echo "<th scope='row'>" . $row['producto'] . "</th>";
+                //precio
+                echo "<th>" . $row['price'] . "</th>";
+                //cantidad
+                echo "<th>" . $row['cantidad'] . "</th>";
+                //subtotal
+                echo "<th>" . $row['subtotal'] . "</th>";
+                echo "</tr>";
+              };
             ?>
           </tbody>
       </table>
-      <?php
-      $rs_result = mysqli_query($conexion, $sql_temp);
-      $row = mysqli_fetch_array($rs_result);
-      $total_records = $row[0];
-      $total_pages = ceil($total_records / $limit);
-      $pagLink = "<div class='pagination'>";
-      for ($i = 0; $i < $total_pages; $i++) {
-        $num = $i + 1;
-        if (isset($_GET['busqueda'])) {
-          $pagLink .= "<a href='./registro.php?page=" . $num . "+&busqueda=" . $_GET['busqueda'] . "'>" . $num . "</a>";
-        } else {
-          $pagLink .= "<a href='./registro.php?page=" . $num . "'>" . $num . "</a>";
-        }
-      };
-      echo $pagLink . "</div>";
-      ?>
     </div>
   </body>
   <footer class="page-footer font-small blue pt-4">

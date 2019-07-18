@@ -46,7 +46,7 @@
           <?php
             if($rol == 1 || $rol == 2){
               echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="./alamacen.php">Alamacen</a>';
+              echo '<a class="nav-link" href="./almacen.php">Almacen</a>';
               echo '</li>';
             }
           ?>
@@ -195,7 +195,7 @@
             echo $pagLink . "</div>";  
           ?>
           <script>
-            function editarProducts(id, name, catgory_id, stock, price, cell) {
+            function editarProducts(id, name, catgory_id, price, stock, cell) {
               console.log(id, catgory_id, name, stock, price, cell);
               $("#modalProduct").modal("show");
               $("#prod_id").val(id);

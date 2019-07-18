@@ -33,6 +33,8 @@
         $sql3_values = "stock = stock - $val_cantidad";
         $sql3_update = "UPDATE products SET ".$sql3_values." WHERE id = ".$val_id;
         mysqli_query($conexion, $sql3_update);
+
+        echo '<script>window.location.href ="processing.php";</script>';
       }
     }
   } 
