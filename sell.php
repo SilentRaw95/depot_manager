@@ -150,6 +150,20 @@
       <script>
         // carrito
         var carrito = []
+        //storage 
+        var storage = JSON.parse(localStorage.getItem("carrito"))
+        console.log(storage)
+
+        if (storage != null){
+          var carrito = storage
+          var divText = document.getElementById('icon_cart');
+          divText.textContent = " "+carrito.length;
+        }
+        
+        function doSomething() {
+          // Store
+          localStorage.setItem("carrito", null);
+        }
         
         //anadir algo al carrito
         function addProduct(id, price, stock, name){
@@ -176,6 +190,9 @@
 
             var divText = document.getElementById('icon_cart');
             divText.textContent = " "+carrito.length;
+
+            // Store
+            localStorage.setItem("carrito", JSON.stringify(carrito));
           } else if(found == false) {
             alert("se pasa el stock")
           } else {
@@ -277,7 +294,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="" method="post">
+            <form onsubmit="return doSomething();" action="" method="post">
               <div class="modal-body"></div>
               <div class="modal-footer">
                 <input class="btn btn-primary" name="save_order" id="save_order" type="submit" value="Guardar">
