@@ -207,6 +207,7 @@
 
         function deleteFn(index) {
           carrito.splice(index, 1);
+          localStorage.setItem("carrito", JSON.stringify(carrito));
           printTable();
         }
 
@@ -225,6 +226,7 @@
             for(var i = 0; i < carrito.length; i++){
               total = total + carrito[index].sub_total;
             }
+            localStorage.setItem("carrito", JSON.stringify(carrito));
             document.getElementById("total").value = ""+total;
           } else {
             document.getElementById(field).value = 1;
