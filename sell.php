@@ -194,9 +194,9 @@
             // Store
             localStorage.setItem("carrito", JSON.stringify(carrito));
           } else if(found == false) {
-            alert("se pasa el stock")
+            alert("Stock insuficiente")
           } else {
-            alert("ya tienes el producto en el carrito")
+            alert("Ya tienes el producto en el carrito")
           }
         }
 
@@ -230,7 +230,7 @@
             document.getElementById("total").value = ""+total;
           } else {
             document.getElementById(field).value = 1;
-            alert("se pasa el stock")
+            alert("Stock insuficiente")
           }
         }
 
@@ -278,7 +278,7 @@
           }
           estructura = estructura + '<div class="form-row">';
           estructura = estructura + '<p>Label:</p>';
-          estructura = estructura + '<input class="form-control" type="text" id="total" name="total" value="'+total+'" readonly="true">';
+          estructura = estructura + '<input class="form-control" type="text" id="total" name="total" value="'+total+' $" readonly="true">';
           estructura = estructura + '</div>';
           $("div.modal-body").html(estructura);
         }

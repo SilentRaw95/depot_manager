@@ -88,11 +88,11 @@
                 //Producto
                 echo "<th scope='row'>" . $row['producto'] . "</th>";
                 //precio
-                echo "<th>" . $row['price'] . "</th>";
+                echo "<th>" . $row['price'] . " $</th>";
                 //cantidad
                 echo "<th>" . $row['cantidad'] . "</th>";
                 //subtotal
-                echo "<th>" . $row['subtotal'] . "</th>";
+                echo "<th>" . $row['subtotal'] . " $</th>";
                 echo "</tr>";
               };
             ?>

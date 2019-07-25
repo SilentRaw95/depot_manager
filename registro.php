@@ -106,7 +106,7 @@
               //fecha
               echo "<th>" . $row['fecha'] . "</th>";
               //total
-              echo "<th>" . $row['total'] . "</th>";
+              echo "<th>" . $row['total'] . " $</th>";
               //detalle
               echo '<td>
                 <a class="btn btn-primary" href= "./registro_prod.php?reg_prod='.$row['id'].'">Ver orden</button>

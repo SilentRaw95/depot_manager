@@ -165,7 +165,7 @@
                   //categoria
                   echo "<th>".$row['categoria_name']."</th>";
                   //precio
-                  echo "<th>".$row['price']."</th>";
+                  echo "<th>".$row['price']." $</th>";
                   //stock
                   echo "<th>".$row['stock']."</th>";
                   //bodega
